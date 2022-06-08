@@ -9,9 +9,8 @@ interface TabelaProps{
 
 export default function Tabela(props: TabelaProps){
 
-    const exibiracoes =  props.clienteExcluido || props.clienteSelecionado
+    const exibirAcoes =  props.clienteExcluido || props.clienteSelecionado
     
-
     function renderizarCabecalho(){
             return(
 
@@ -19,7 +18,7 @@ export default function Tabela(props: TabelaProps){
                     <th className="text-left p-4">Código</th>
                     <th className="text-left p-4">Nome</th>
                     <th className="text-left p-4">Idade</th>
-                    <th className=" p-4">Ações</th>
+                    {exibirAcoes ? <th className=" p-4">Ações</th> :  false}
                 </tr>
             )
     }
@@ -33,18 +32,17 @@ export default function Tabela(props: TabelaProps){
                     <td className="text-left p-4">{cliente.id}</td>
                     <td className="text-left p-4">{cliente.nome}</td>
                     <td className="text-left p-4">{cliente.idade}</td>
-                    {renderizarAcoes(cliente)}
+                    {exibirAcoes ? renderizarAcoes(cliente) : false}
                 </tr>
             )
         } )
     } 
 
-
     function renderizarAcoes(cliente: Cliente){
         return (
-            <td className="flex">
+            <td className="flex justify-center">
             {props.clienteSelecionado ? (
-                <button className={`
+                <button onClick={() => props.clienteSelecionado?.(cliente)} className={`
                 flex justify-center items-center
                 text-green-600 rounded-full p-2 m-1 
                 hover:bg-purple-50 `}>
@@ -52,7 +50,7 @@ export default function Tabela(props: TabelaProps){
                 </button>
             ): false }    
             {props.clienteExcluido ? (
-                <button className={`
+                <button onClick={() => props.clienteExcluido?.(cliente)} className={`
                 flex justify-center items-center
                 text-red-600 rounded-full p-2 m-1 
                 hover:bg-purple-50 `}>
@@ -62,7 +60,6 @@ export default function Tabela(props: TabelaProps){
             </td>
         )
     }
-
 
     return (
         <table className="w-full rounded-xl overflow-hidden">
