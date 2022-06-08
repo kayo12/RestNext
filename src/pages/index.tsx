@@ -1,3 +1,4 @@
+import Botao from "../components/Botao";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
 import Cliente from "../core/Cliente";
@@ -22,6 +23,9 @@ export default function Home() {
     <div className={`flex h-screen justify-center items-center bg-gradient-to-r from-purple-500  to-blue-600 `}>
      
       <Layout titulo="Cadastro de conteudo" >
+        <div className="flex justify-end">
+          <Botao className="mb-4">Novo Cliente </Botao>
+        </div>  
           <Tabela clientes={clientes} clienteSelecionado={clienteSelecionado} clienteExcluido={clienteExcluido}></Tabela>
       </Layout>
     </div>
